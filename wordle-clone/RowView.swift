@@ -8,22 +8,31 @@
 import SwiftUI
 
 struct RowView:View {
-    var numOfLetters: Int
-    var rowGuess: Array<String>
+    @ObservedObject var boardData: BoardData
+    var rowGuess: String
+    var isCurrentGuess: Bool
+    var rowGuessAsArray : [String]
+    var wordColors : [Color]
+
     
-    init(numOfLetters: Int, rowGuess: String) {
-        self.numOfLetters = numOfLetters
-        
+    init(boardData: BoardData, rowGuess: String, isCurrentGuess: Bool) {
+        self.boardData = boardData
         // Split word up into individual letters.
-        self.rowGuess = rowGuess.map{String($0)}
+        self.rowGuess = isCurrentGuess && rowGuess == "" ? boardData.currentGuess : rowGuess
+        self.isCurrentGuess = isCurrentGuess
+        self.rowGuessAsArray = self.rowGuess.map{String($0)}
+        
+        self.wordColors = !isCurrentGuess
+            ? boardData.calculateWordColors(word: self.rowGuess)
+            : boardData.calculateWordColors(word: "")
     }
     
     var body: some View {
         HStack {
-            ForEach(0 ..< numOfLetters) { num in
-                let curLetter = num > rowGuess.count - 1
+            ForEach(0 ..< boardData.wordLength) { index in
+                let curLetter = index > rowGuessAsArray.count - 1
                     ? ""
-                    : rowGuess[num]
+                    : rowGuessAsArray[index]
                 
                 Text(curLetter)
                 .textCase(.uppercase)
@@ -31,7 +40,7 @@ struct RowView:View {
                 .frame(width: 50, height: 50)
                 .background(
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
-                    .fill(/*@START_MENU_TOKEN@*/Color.gray/*@END_MENU_TOKEN@*/)
+                        .fill(wordColors[index])
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                 )
             }
