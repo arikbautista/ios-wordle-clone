@@ -11,6 +11,8 @@
 		8C80B66F27C73E7600739EA0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C80B66E27C73E7600739EA0 /* ContentView.swift */; };
 		8C80B67127C73E7600739EA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C80B67027C73E7600739EA0 /* Assets.xcassets */; };
 		8C80B67427C73E7600739EA0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C80B67327C73E7600739EA0 /* Preview Assets.xcassets */; };
+		8C9BFC6427CBFAE200D5E514 /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9BFC6327CBFAE200D5E514 /* KeyboardView.swift */; };
+		8C9BFC6727CBFC6200D5E514 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C9BFC6627CBFC6200D5E514 /* RowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		8C80B67027C73E7600739EA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C80B67327C73E7600739EA0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8C80B67527C73E7600739EA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C9BFC6327CBFAE200D5E514 /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		8C9BFC6627CBFC6200D5E514 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +56,8 @@
 		8C80B66B27C73E7500739EA0 /* wordle-clone */ = {
 			isa = PBXGroup;
 			children = (
+				8C9BFC6627CBFC6200D5E514 /* RowView.swift */,
+				8C9BFC6327CBFAE200D5E514 /* KeyboardView.swift */,
 				8C80B66C27C73E7600739EA0 /* wordle_cloneApp.swift */,
 				8C80B66E27C73E7600739EA0 /* ContentView.swift */,
 				8C80B67027C73E7600739EA0 /* Assets.xcassets */,
@@ -138,8 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C9BFC6427CBFAE200D5E514 /* KeyboardView.swift in Sources */,
 				8C80B66F27C73E7600739EA0 /* ContentView.swift in Sources */,
 				8C80B66D27C73E7600739EA0 /* wordle_cloneApp.swift in Sources */,
+				8C9BFC6727CBFC6200D5E514 /* RowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
