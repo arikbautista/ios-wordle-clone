@@ -14,6 +14,7 @@ struct ContentView: View {
         VStack {
             //Banner
             BannerView()
+            Spacer()
             
             // Letter Grid
             ForEach(0 ..< globalBoardData.numOfRows) { rowIndex in

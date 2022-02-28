@@ -24,26 +24,35 @@ struct RowView:View {
         
         self.wordColors = !isCurrentGuess
             ? boardData.calculateWordColors(word: self.rowGuess)
-            : boardData.calculateWordColors(word: "")
+            : boardData.calculateWordColors(word: "") // defaults to all gray.
     }
     
     var body: some View {
         HStack {
+            Spacer()
             ForEach(0 ..< boardData.wordLength) { index in
                 let curLetter = index > rowGuessAsArray.count - 1
                     ? ""
                     : rowGuessAsArray[index]
                 
                 Text(curLetter)
+                .fontWeight(.bold)
                 .textCase(.uppercase)
                 .padding(.vertical, 10.0)
-                .frame(width: 50, height: 50)
+                .frame(maxWidth: 55)
+                .frame(maxHeight: 55)
                 .background(
                     RoundedRectangle(cornerRadius: 5, style: .continuous)
                         .fill(wordColors[index])
                     .border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                )
+                ).onAppear(perform: {
+                    if (curLetter != "") {
+                        boardData.updateUsedLetters(letter: curLetter, color: wordColors[index])
+                    }
+                })
+
             }
+            Spacer()
         }
     }
 }

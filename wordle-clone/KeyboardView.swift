@@ -26,7 +26,7 @@ struct KeyboardView:View {
             KeyboardRow(letterArray: topRowKeys, boardData: boardData)
             KeyboardRow(letterArray: middleRowKeys, boardData: boardData)
             HStack {
-                
+                Spacer()
                 Text(enterKeyText).onTapGesture(perform: {
                     let isWordFull = boardData.currentGuess.count == boardData.wordLength
                     let isMaxGuess = boardData.guessArray.count > boardData.numOfRows
@@ -45,6 +45,7 @@ struct KeyboardView:View {
                 .onTapGesture(perform: {
                     boardData.currentGuess = String(boardData.currentGuess.dropLast())
                 })
+                Spacer()
             }
         }
     }
@@ -62,11 +63,20 @@ struct KeyboardRow: View {
     var body: some View {
         HStack {
             ForEach(letterArray, id: \.self) { letter in
+                
+                let letterColor: Color = boardData.usedLetters[letter.uppercased()] ?? Color.white
+                
                 Text(letter)
+                    .fontWeight(.semibold)
+                    .foregroundColor(Color.black)
                     .padding(.vertical)
-                    .frame(width: 24, height: 30)
-                    .cornerRadius(16)
-                    .border(Color.gray, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                    .frame(maxWidth: 30)
+                    .frame(height: 30)
+                    .background(
+                        RoundedRectangle(cornerRadius: 2, style: .continuous)
+                            .fill(letterColor)
+                        .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                    )
                     .onTapGesture(perform: {
                         if (boardData.currentGuess.count  >= boardData.wordLength) {
                             return

@@ -13,7 +13,7 @@ class BoardData: ObservableObject {
     @Published var wordLength = 5
     @Published var numOfRows = 6
     
-    @Published var correctWord = "crane"
+    @Published var correctWord = "brave"
     
     // Key: letter used
     // Value: the color that should be represented on the keyboard
@@ -40,10 +40,12 @@ class BoardData: ObservableObject {
             
             let isSetEmptyOrNull : Bool = curIndexSet?.isEmpty ?? true
             if ( isSetEmptyOrNull || curLetter == "") {
-                colorResult.append(Color.gray)
+                // White is default.
+                colorResult.append(curLetter == "" ? Color.white : Color.gray)
                 index += 1
                 continue
             }
+            
             
             let isInRightSpot : Bool = curIndexSet?.contains(index) ?? false
             
@@ -96,6 +98,22 @@ class BoardData: ObservableObject {
         }
         
         return result
+    }
+    
+    func updateUsedLetters(letter: String, color: Color) -> Void {
+        let letter = letter.uppercased()
+        if (letter == "") {
+            return
+        }
+        let lastColorOfLetter : Color = usedLetters[letter] ?? Color.gray
+        if ( lastColorOfLetter == Color.gray) {
+            usedLetters.updateValue(color, forKey: letter)
+        }
+        
+        if ( lastColorOfLetter == Color.yellow && color != Color.gray) {
+            usedLetters.updateValue(color, forKey: letter)
+        }
+        
     }
     
 }
