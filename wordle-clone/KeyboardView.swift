@@ -30,11 +30,16 @@ struct KeyboardView:View {
                 Text(enterKeyText).onTapGesture(perform: {
                     let isWordFull = boardData.currentGuess.count == boardData.wordLength
                     let isMaxGuess = boardData.guessArray.count > boardData.numOfRows
+                    let isCorrectGuess = boardData.currentGuess.uppercased() == boardData.correctWord.uppercased()
                     
                     if (!isWordFull || isMaxGuess) {
                         return
                     }
                     
+                    if (isCorrectGuess){
+                        boardData.hasFinishedGame = true
+                    }
+
                     boardData.guessArray.append(boardData.currentGuess)
                     boardData.currentGuess = ""
                 })
@@ -70,15 +75,17 @@ struct KeyboardRow: View {
                     .fontWeight(.semibold)
                     .foregroundColor(Color.black)
                     .padding(.vertical)
-                    .frame(maxWidth: 30)
-                    .frame(height: 30)
+                    .frame(maxWidth: 32)
+                    .frame(maxHeight: 50)
                     .background(
                         RoundedRectangle(cornerRadius: 2, style: .continuous)
                             .fill(letterColor)
                         .border(Color.black, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
                     )
                     .onTapGesture(perform: {
-                        if (boardData.currentGuess.count  >= boardData.wordLength) {
+                        
+                        let canInput = boardData.currentGuess.count >= boardData.wordLength || boardData.hasFinishedGame
+                        if (canInput) {
                             return
                         }
                         

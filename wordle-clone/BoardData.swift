@@ -13,7 +13,9 @@ class BoardData: ObservableObject {
     @Published var wordLength = 5
     @Published var numOfRows = 6
     
-    @Published var correctWord = "brave"
+    @Published var correctWord = "frame"
+    
+    @Published var hasFinishedGame : Bool = false
     
     // Key: letter used
     // Value: the color that should be represented on the keyboard
@@ -114,6 +116,14 @@ class BoardData: ObservableObject {
             usedLetters.updateValue(color, forKey: letter)
         }
         
+    }
+    
+    func finishGame(lastWord: String) {
+        if (lastWord.uppercased() == self.correctWord.uppercased()) {
+            //
+        }
+        
+        self.hasFinishedGame = true
     }
     
 }
