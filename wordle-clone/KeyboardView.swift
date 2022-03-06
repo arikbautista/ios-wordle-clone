@@ -35,13 +35,13 @@ struct KeyboardView:View {
                     if (!isWordFull || isMaxGuess) {
                         return
                     }
-                    
-                    if (isCorrectGuess){
-                        boardData.hasFinishedGame = true
-                    }
 
                     boardData.guessArray.append(boardData.currentGuess)
                     boardData.currentGuess = ""
+                    
+                    if (isCorrectGuess || boardData.guessArray.count == boardData.numOfRows){
+                        boardData.hasFinishedGame = true
+                    }
                 })
                 
                 KeyboardRow(letterArray: bottomRowKeys, boardData: boardData)

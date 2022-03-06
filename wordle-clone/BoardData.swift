@@ -13,7 +13,7 @@ class BoardData: ObservableObject {
     @Published var wordLength = 5
     @Published var numOfRows = 6
     
-    @Published var correctWord = "frame"
+    @Published var correctWord = "rhyme"
     
     @Published var hasFinishedGame : Bool = false
     
@@ -118,12 +118,30 @@ class BoardData: ObservableObject {
         
     }
     
-    func finishGame(lastWord: String) {
-        if (lastWord.uppercased() == self.correctWord.uppercased()) {
-            //
+    func getFinishGameMessage() -> String{
+        // Messages are only configured for 6 guesses.
+        if (self.guessArray.last?.uppercased() != self.correctWord.uppercased()) {
+            return "Better luck next time"
         }
         
-        self.hasFinishedGame = true
+        let numOfGuesses = self.guessArray.count
+        
+        switch numOfGuesses {
+        case 1:
+            return "Cheater"
+        case 2:
+            return "Lucky"
+        case 3:
+            return "Genius"
+        case 4:
+            return "Great"
+        case 5:
+            return "Not bad"
+        case self.numOfRows:
+            return "Close Call"
+        default:
+            return "Nice" // if we have more than 6 guesses
+        }
     }
     
 }
